@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/home/boris.grillborzer/PycharmProjects/KeypointDetectionCCTV/main.py", line 143, in <module>
+    train_one_epoch(model, optimizer, data_loader_train, device, epoch, print_freq=1000)
+  File "/home/boris.grillborzer/PycharmProjects/KeypointDetectionCCTV/engine.py", line 27, in train_one_epoch
+    for images, targets in metric_logger.log_every(data_loader, print_freq, header):
+  File "/home/boris.grillborzer/PycharmProjects/KeypointDetectionCCTV/utils.py", line 171, in log_every
+    for obj in iterable:
+  File "/home/boris.grillborzer/miniconda3/envs/depth2/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 633, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/boris.grillborzer/miniconda3/envs/depth2/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 677, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/boris.grillborzer/miniconda3/envs/depth2/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/boris.grillborzer/miniconda3/envs/depth2/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/home/boris.grillborzer/PycharmProjects/KeypointDetectionCCTV/Mydataset.py", line 53, in __getitem__
+    keypoints_original_flattened = [el[0:2] for kp in keypoints_original for el in kp]
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/boris.grillborzer/PycharmProjects/KeypointDetectionCCTV/Mydataset.py", line 53, in <listcomp>
+    keypoints_original_flattened = [el[0:2] for kp in keypoints_original for el in kp]
+                                    ~~^^^^^
+TypeError: 'int' object is not subscriptable
+
