@@ -19,11 +19,11 @@ def extract_annotations(json_path, output_dir):
         image_id = ann["id"]    # Oder besser image_id
         bbox = ann.get("bbox", [])
         keypoints = ann.get("keypoints", [])
-
+        corrected_bbox = subtracted_correct_bbox(bbox) #Does make x, widht, y height Coco Format instead of x, y, width, height u dig
         if image_id not in annotations_by_image:
             annotations_by_image[image_id] = {"bboxes": [], "keypoints": []}
 
-        annotations_by_image[image_id]["bboxes"].append(bbox)
+        annotations_by_image[image_id]["bboxes"].append(corrected_bbox)
         annotations_by_image[image_id]["keypoints"].append(keypoints)
 
     # JSON-Dateien für jedes Bild speichern
@@ -68,6 +68,31 @@ def recreate_txtpaths_sorted(sorted_txtpaths_with_twodigit):
         # Erstelle den neuen Pfad mit dem angepassten Dateinamen
         corrected_file_paths.append(os.path.join(path_skelraw_data, updated_file_name))
     return corrected_file_paths
+
+
+# def subtracted_correct_bbox(bboxes):
+#     corrected_bboxes = []
+#     for bbox in bboxes:
+#         x = bbox[0]
+#         y = bbox[1]
+#         width = bbox[2]
+#         height = bbox[3]
+#
+#         corrected_bboxes.append([x, width, y, height])
+#
+#     return corrected_bboxes
+
+def subtracted_correct_bbox(bboxes):
+    corrected_bboxes = []
+    for bbox in bboxes:
+        x = bbox[0]
+        y = bbox[2]
+        width = bbox[1]
+        height = bbox[3]
+
+        corrected_bboxes.append([x, width, y, height])
+
+    return corrected_bboxes
 
 
 # Beispielaufruf
